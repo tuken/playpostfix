@@ -8,6 +8,7 @@ import play.api.mvc._
 import scala.concurrent._
 import models._
 import models.Tables._
+import play.libs.Json
 import slick.driver.MySQLDriver.api._
 
 //object Tables extends{ // or just use object demo.Tables, which is hard-wired to the driver stated during generation
@@ -37,6 +38,8 @@ class HomeController @Inject() extends Controller {
 //  def byId(id: Int) = db.withSession { implicit session =>
 //    println(Alias.filter(_.id === 1).run)
 //  }
+
+  def getAll(): Future[List[Alias]] = db.run { Alias.to[List].result }
 
   def findById(id: Int): Future[Option[Tables.AliasRow]] = {
     val query: Query[Tables.Alias, Tables.Alias#TableElementType, Seq] = Alias.filter(_.id === id)
