@@ -1,4 +1,5 @@
 package models
+
 // AUTO-GENERATED Slick data model
 /** Stand-alone Slick data model for immediate use */
 object Tables extends {
@@ -19,7 +20,8 @@ trait Tables {
   def ddl = schema
 
   /** Entity class storing rows of table Alias
-   *  @param id Database column id SqlType(INT), AutoInc, PrimaryKey
+    *
+    *  @param id Database column id SqlType(INT), AutoInc, PrimaryKey
    *  @param domainId Database column domain_id SqlType(INT)
    *  @param address Database column address SqlType(VARCHAR), Length(255,true), Default()
    *  @param goto Database column goto SqlType(TEXT)
@@ -60,7 +62,8 @@ trait Tables {
   lazy val Alias = new TableQuery(tag => new Alias(tag))
 
   /** Entity class storing rows of table Domain
-   *  @param id Database column id SqlType(INT), AutoInc, PrimaryKey
+    *
+    *  @param id Database column id SqlType(INT), AutoInc, PrimaryKey
    *  @param domain Database column domain SqlType(VARCHAR), Length(255,true), Default()
    *  @param description Database column description SqlType(VARCHAR), Length(255,true), Default()
    *  @param createdAt Database column created_at SqlType(TIMESTAMP)
