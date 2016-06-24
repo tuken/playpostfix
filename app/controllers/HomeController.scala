@@ -25,7 +25,7 @@ import slick.driver.MySQLDriver.api._
  * application's home page.
  */
 @Singleton
-class HomeController @Inject() extends Controller {
+class HomeController @Inject() (aliasDao: AliasDao) extends Controller {
 
   object JsonFormat {
     implicit val aliasFormat = Json.format[Alias]
@@ -46,19 +46,15 @@ class HomeController @Inject() extends Controller {
 //    println(Alias.filter(_.id === 1).run)
 //  }
 
-  private def successResponse(data: JsValue, message: String) = {
-    obj("status" -> "success", "data" -> data, "msg" -> message)
-  }
-
-  def getAll() = Action.async {
-    Tables.getAll().map { res =>
-      Ok(successResponse(Json.toJson(res), "Getting alias list successfully"))
+  def getAll() = Action.async { implicit request =>
+    aliasDao.getAll map {
+      alias => Ok(Json.toJson(alias))
     }
   }
 
-  def findById(id: Int): Future[Option[Tables.AliasRow]] = {
-    val query: Query[Tables.Alias, Tables.Alias#TableElementType, Seq] = Alias.filter(_.id === id)
-    val action = query.result.headOption
-    db.run(action)
-  }
+//  def findById(id: Int): Future[Option[Tables.AliasRow]] = {
+//    val query: Query[Tables.Alias, Tables.Alias#TableElementType, Seq] = Alias.filter(_.id === id)
+//    val action = query.result.headOption
+//    db.run(action)
+//  }
 }

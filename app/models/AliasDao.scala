@@ -16,8 +16,16 @@ class AliasDao @Inject() (protected val dbConfigProvider: DatabaseConfigProvider
   val profile = driver
   import driver.api._
 
-  def getAll(implicit ec: ExecutionContext): Future[List[AliasApi]] = {
+  def getAll(implicit ec: ExecutionContext): Future[Seq[AliasApi]] = {
     db.run(getAliasQuery().result)
+//      db.run(getAliasQuery().result) map {
+//      dataTuples =>
+//        val groupedByPerson = dataTuples.groupBy(_._1)
+//        groupedByPerson.map {
+//          AliasApi(
+//            id = )
+//        }
+//    }
   }
 
   private def getAliasQuery(maybeId: Option[Int] = None) = {
@@ -25,9 +33,10 @@ class AliasDao @Inject() (protected val dbConfigProvider: DatabaseConfigProvider
       case None => Alias
       case Some(id) => Alias.filter(_.id === id)
     }
+    aliasQuery
 
-    val withAliasQuery = for {
-      
-    }
+//    val withAliasQuery = for {
+//
+//    }
   }
 }
