@@ -1,35 +1,17 @@
 package controllers
 
-import javax.inject._
-
-import play.api._
+import javax.inject.Inject
 import play.api.mvc._
-
-import scala.concurrent._
-import models._
-import models.Tables._
-//import play.libs.Json
-import play.api.libs.json._
 import play.api.libs.json.Json
-
-import slick.driver.MySQLDriver.api._
-
-//object Tables extends{ // or just use object demo.Tables, which is hard-wired to the driver stated during generation
-//  val profile = slick.driver.MySQLDriver
-//} with models.Tables
-//import Tables._
-//import Tables.profile.backend._
+//import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import scala.concurrent.ExecutionContext.Implicits.global
+import models._
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
-@Singleton
 class HomeController @Inject() (aliasDao: AliasDao) extends Controller {
-
-  object JsonFormat {
-    implicit val aliasFormat = Json.format[Alias]
-  }
 
   /**
    * Create an Action to render an HTML page with a welcome message.
