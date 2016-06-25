@@ -1,20 +1,28 @@
-@*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
-@(message: String)
+@main("Play Angular App") {
+<div ng-controller="aliasCtrl">
+ <div>
+  <div class="row emp-header">
+   <!-- Employee search -->
+   <div class="col-sm-4 col-md-4 col-lg-4">
+    <input class="form-control" style="width: 70%;" type="text" ng-model="searchAlias" placeholder="Search alias ..."/>
+   </div>
+   <!-- Alert messages -->
+   <div class="col-sm-4 col-md-4 col-lg-4">
+    <div ng-repeat="alert in alerts">
+     <notification ng-model="alert"></notification>
+    </div>
+   </div>
+   <!-- Add new employee link -->
+   <div class="col-sm-4 col-md-4 col-lg-4">
+    <botton class="btn btn-success btn-sm add-button" style="font-weight: 600;" data-toggle="modal" data-target="#newAliasModal">Add new alias</botton>
+   </div>
+  </div>
+ </div>
+ <hr>
 
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
-@main("Welcome to Play") {
+ @views.html.alias.aliasList()
+ @views.html.alias.newAliasForm()
+ @views.html.alias.editAliasForm()
 
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @play20.welcome(message, style = "Scala")
-
+</div>
 }

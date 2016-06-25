@@ -56,6 +56,6 @@ class CodeGenController @Inject() extends Controller {
 
     val codeGenFuture = new CustomSourceCodeGenerator(fModel).writeToFile(slickDriver, outputFolder , pkg, "Tables", "Tables.scala")
 
-    Ok(views.html.index("Finish code generating!"))
+    Ok(views.html.index())
   }
 }
