@@ -1,0 +1,32 @@
+
+<!-- Employee Form Modal -->
+<form id="newAliasForm" role="form" ng-submit="addAlias()">
+    <div class="modal fade" id="newAliasModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Fill alias details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="address">アドレス</label>
+                        <input type="email" class="form-control" id="address" name="address" ng-model="newAlias.address" placeholder="アドレス" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="goto">転送先</label>
+                        <input type="text" class="form-control" id="goto" name="goto" ng-model="newAlias.goto" placeholder="転送先" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="active">有効</label>
+                        <input type="text" class="form-control" id="active" name="active" ng-model="newAlias.active" placeholder="有効" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
+                    <input type="submit" ng-disabled="newAliasForm.$invalid" class="btn btn-warning" id="submit" value="Add New" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
