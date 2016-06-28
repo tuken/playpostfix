@@ -1,78 +1,77 @@
-var app = angular.module('myApp', []);
-app.controller('aliasCtrl', function($scope, $http, $timeout) {
- $scope.aliases = [];
- $scope.newAlias = {};
- function getAllAlias() {
+app.controller('domainCtrl', function($scope, $http, $timeout) {
+ $scope.domains = [];
+ $scope.newDomain = {};
+ function getAllDomain() {
      $http({
          method: 'GET',
-         url: '/alias/list'
+         url: '/domain/list'
      }).success(function(data, status) {
          if (status == 200) {
-             $scope.aliases = data;
+             $scope.domains = data;
          }
      });
  }
 
- $scope.selectedAlias = {};
- $scope.editAlias = function(alias) {
-     $scope.selectedAlias = angular.copy(alias);
+ $scope.selectedDomain = {};
+ $scope.editDomain = function(domain) {
+     $scope.selectedDomain = angular.copy(domain);
  };
 
- $scope.updateAlias = function() {
+ $scope.updateDomain = function() {
      $http({
          method: 'POST',
-         url: '/alias/update',
-         data: $scope.selectedAlias,  // pass in form data as Json
+         url: '/domain/update',
+         data: $scope.selectedDomain,  // pass in form data as Json
      }).success(function(data, status) {
          $('.modal').modal('hide');
          showAlertMessage(data.status, data.msg);
-         getAllAlias();
+         getAllDomain();
      });
  };
 
- $scope.removeAlias = function(aliasId){
+ $scope.removeDomain = function(domainId){
      $http({
          method: 'GET',
-         url: '/alias/delete',
-         params: {aliasId: aliasId}
+         url: '/domain/delete',
+         params: {domainId: domainId}
      }).success(function(data, status) {
-         if(data.status == "success") {
-             var newAliasList=[];
-             angular.forEach($scope.aliases,function(alias) {
-                 if(alias.id != aliasId) {
-                     newAliasList.push(alias);
+         if (data.status == "success") {
+             var newDomainList=[];
+             angular.forEach($scope.domains,function(domain) {
+                 if (domain.id != domainId) {
+                     newDomainList.push(domain);
                  }
              });
-             $scope.aliases = newAliasList;
+             $scope.domains = newDomainList;
          }
          showAlertMessage(data.status, data.msg);
      });
  }
 
- $scope.addAlias = function() {
+ $scope.addDomain = function() {
      $http({
          method: 'POST',
-         url: '/alias/create',
-         data: $scope.newAlias,  // pass in form data as Json
+         url: '/domain/create',
+         data: $scope.newDomain,  // pass in form data as Json
      }).success(function(data, status) {
          $('.modal').modal('hide');
-         if(data.status == "success") {
+         if (data.status == "success") {
              var newId = data.data.id;
-             $scope.newAlias["id"] = newId;
-             $scope.alias.push($scope.newAlias);
-             $scope.newAlias = {};
+             $scope.newDomain["id"] = newId;
+             $scope.domain.push($scope.newDomain);
+             $scope.newDomain = {};
          }
          showAlertMessage(data.status, data.msg);
      });
  }
 
- getAllAlias();
+ getAllDomain();
  $scope.alerts = [];
 
  function showAlertMessage(status, message) {
-     if(status == "success") {
+     if (status == "success") {
          $scope.alerts.push({type: "alert-success", title: "SUCCESS", content: message});
-     } else if(status == "error") {
+     } else if (status == "error") {
          $scope.alerts.push({type: "alert-danger", title: "ERROR", content: message});
      }
  };

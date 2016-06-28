@@ -4,8 +4,10 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index
+#GET     /                           controllers.DomainController.index
 #GET     /                           controllers.HomeController.findById(id: Int)
 GET     /alias/list                           controllers.HomeController.getAll
+GET     /domain/list                          controllers.DomainController.getAll
 GET     /codegen                    controllers.CodeGenController.index
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
