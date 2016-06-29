@@ -13,7 +13,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
-class DomainController @Inject()(domainDao: DomainDao) extends Controller {
+class AliasController @Inject()(aliasDao: AliasDao) extends Controller {
 
   /**
    * Create an Action to render an HTML page with a welcome message.
@@ -22,7 +22,7 @@ class DomainController @Inject()(domainDao: DomainDao) extends Controller {
    * a path of `/`.
    */
   def index = Action {
-    Ok(views.html.domainindex())
+    Ok(views.html.aliasindex())
   }
 
 //  val db = Database.forURL("jdbc:mysql://localhost/pfix", driver = "com.mysql.jdbc.Driver", user = "root", password = "2003Flower1101")
@@ -31,8 +31,8 @@ class DomainController @Inject()(domainDao: DomainDao) extends Controller {
 //  }
 
   def getAll() = Action.async { implicit request =>
-    domainDao.getAll map {
-      domain => Ok(Json.toJson(domain))
+    aliasDao.getAll map {
+      alias => Ok(Json.toJson(alias))
     }
   }
 

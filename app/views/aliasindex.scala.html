@@ -1,0 +1,28 @@
+@main("Play Angular App") {
+<div ng-controller="aliasCtrl">
+ <div>
+  <div class="row emp-header">
+   <!-- Alias search -->
+   <div class="col-sm-4 col-md-4 col-lg-4">
+    <input class="form-control" style="width: 70%;" type="text" ng-model="searchAlias" placeholder="Search alias ..."/>
+   </div>
+   <!-- Alert messages -->
+   <div class="col-sm-4 col-md-4 col-lg-4">
+    <div ng-repeat="alert in alerts">
+     <notification ng-model="alert"></notification>
+    </div>
+   </div>
+   <!-- Add new alias link -->
+   <div class="col-sm-4 col-md-4 col-lg-4">
+    <botton class="btn btn-success btn-sm add-button" style="font-weight: 600;" data-toggle="modal" data-target="#newAliasModal">Add new alias</botton>
+   </div>
+  </div>
+ </div>
+ <hr>
+
+ @views.html.alias.aliasList()
+ @views.html.alias.newAliasForm()
+ @views.html.alias.editAliasForm()
+
+</div>
+}

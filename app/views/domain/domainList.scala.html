@@ -7,16 +7,19 @@
     <th></th>
     </thead>
     <tbody>
-    <tr ng-repeat="dmn in domains | filter: searchDomain">
-        <td>{{dmn.domain}}</td>
-        <td>{{dmn.description}}</td>
-        <td><button type="button" class="btn btn-primary" ng-model="singleModel" uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" {{dmn.active}}>有効</button></td>
+    <tr ng-repeat="domain in domains | filter: searchDomain">
+        <td>{{domain.domain}}</td>
+        <td>{{domain.description}}</td>
         <td>
-            <i title="Edit" style="color: #128d36;" data-toggle="modal" data-target="#editDomainModal" class="glyphicon glyphicon-edit cursorPointer" ng-click="editDomain(dmn)">
+            <!--<button type="button" class="btn btn-primary" ng-model="singleModel" uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" {{domain.active}}>有効</button>-->
+            <button class="btn btn-info btn-lg" ng-ckick="domain.active!=domain.active" ng-class="{open:domain.active}">有効</button>
+        </td>
+        <td>
+            <i title="Edit" style="color: #128d36;" data-toggle="modal" data-target="#editDomainModal" class="glyphicon glyphicon-edit cursorPointer" ng-click="editDomain(domain)">
             </i>
         </td>
         <td>
-            <i title="Delete" style="color: #d85010;" class="glyphicon glyphicon-trash cursorPointer" ng-click="removeDomain(dmn.id)">
+            <i title="Delete" style="color: #d85010;" class="glyphicon glyphicon-trash cursorPointer" ng-click="removeDomain(domain.id)">
             </i>
         </td>
     </tr>

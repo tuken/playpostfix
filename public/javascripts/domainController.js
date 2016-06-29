@@ -1,3 +1,4 @@
+var app = angular.module('myApp', []);
 app.controller('domainCtrl', function($scope, $http, $timeout) {
  $scope.domains = [];
  $scope.newDomain = {};
