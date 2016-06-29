@@ -66,6 +66,10 @@ app.controller('domainCtrl', function($scope, $http, $timeout) {
      });
  }
 
+ $scope.toggle = function() {
+     //$scope.isActive = !$scope.isActive;
+ }
+
  getAllDomain();
  $scope.alerts = [];
 
