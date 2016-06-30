@@ -1,30 +1,30 @@
 @(param: Any)
-<!-- Employee Edit Form Modal -->
-<form name="editAliasForm" ng-submit="updateAlias()">
-    <div class="modal fade" id="editAliasModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+<!-- domain Edit Form Modal -->
+<form name="editDomainForm" ng-submit="updateDomain()">
+    <div class="modal fade" id="editDomainModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Edit Alias</h4>
+                    <h4 class="modal-title" id="myModalLabel">Edit Domain</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="address">アドレス</label>
-                        <input type="text" class="form-control" ng-model="selectedAlias.address" id="address" value="{{selectedAlias.address}}" required>
+                        <label for="domain">ドメイン</label>
+                        <input type="text" class="form-control" ng-model="selectedDomain.domain" id="domain" value="{{selectedDomain.domain}}" required>
                     </div>
                     <div class="form-group">
-                        <label for="goto">転送先</label>
-                        <input type="email" class="form-control" ng-model="selectedAlias.goto" id="goto" required value="{{selectedAlias.goto}}">
+                        <label for="description">説明</label>
+                        <input type="text" class="form-control" ng-model="selectedDomain.description" id="description" required value="{{selectedDomain.description}}">
                     </div>
                     <div class="form-group">
                         <label for="active">有効</label>
-                        <input type="text" class="form-control" ng-model="selectedAlias.active" value="{{selectedAlias.active}}" id="active" required>
+                        <input type="text" class="form-control" ng-model="selectedDomain.active" value="{{selectedDomain.active}}" id="active" required>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
-                    <input type="submit" ng-disabled="editAliasForm.$invalid" class="btn btn-warning" value="Save" />
+                    <input type="submit" ng-disabled="editDomainForm.$invalid" class="btn btn-warning" value="Save" />
                 </div>
             </div>
         </div>

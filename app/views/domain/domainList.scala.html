@@ -12,8 +12,9 @@
         <td>{{domain.description}}</td>
         <td>
             <!--<button type="button" class="btn btn-primary" ng-model="singleModel" uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" {{domain.active}}>有効</button>-->
-            <button class="btn btn-info btn-xs" ng-class="{active: domain.active}" ng-if="domain.active">有効</button>
-            <button class="btn btn-info btn-xs" ng-class="{active: domain.active}" ng-if="!domain.active">無効</button>
+            <input type="checkbox" ng-model="domain.active" />
+            <!--<button class="btn btn-info btn-xs" ng-class="{active: domain.active}" ng-if="domain.active">有効</button>
+            <button class="btn btn-info btn-xs" ng-class="{active: domain.active}" ng-if="!domain.active">無効</button>-->
         </td>
         <td>
             <i title="Edit" style="color: #128d36;" data-toggle="modal" data-target="#editDomainModal" class="glyphicon glyphicon-edit cursorPointer" ng-click="editDomain(domain)">
