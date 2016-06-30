@@ -38,7 +38,7 @@ app.controller('domainCtrl', function($scope, $http, $timeout) {
      }).success(function(data, status) {
          if (data.status == "success") {
              var newDomainList=[];
-             angular.forEach($scope.domains,function(domain) {
+             angular.forEach($scope.domains, function(domain) {
                  if (domain.id != domainId) {
                      newDomainList.push(domain);
                  }
@@ -66,17 +66,14 @@ app.controller('domainCtrl', function($scope, $http, $timeout) {
      });
  }
 
- $scope.toggle = function() {
-     //$scope.isActive = !$scope.isActive;
- }
-
  getAllDomain();
  $scope.alerts = [];
 
  function showAlertMessage(status, message) {
      if (status == "success") {
          $scope.alerts.push({type: "alert-success", title: "SUCCESS", content: message});
-     } else if (status == "error") {
+     }
+     else if (status == "error") {
          $scope.alerts.push({type: "alert-danger", title: "ERROR", content: message});
      }
  };

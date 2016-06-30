@@ -4,9 +4,8 @@ import javax.inject.Inject
 
 import play.api.libs.json.Json
 import play.api.mvc._
-//import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import scala.concurrent.Future
 import models._
-
 import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
@@ -25,20 +24,20 @@ class DomainController @Inject()(domainDao: DomainDao) extends Controller {
     Ok(views.html.domainindex())
   }
 
-//  val db = Database.forURL("jdbc:mysql://localhost/pfix", driver = "com.mysql.jdbc.Driver", user = "root", password = "2003Flower1101")
-//  def byId(id: Int) = db.withSession { implicit session =>
-//    println(Alias.filter(_.id === 1).run)
-//  }
-
-  def getAll() = Action.async { implicit request =>
+  def getAll = Action.async { implicit request =>
     domainDao.getAll map {
       domain => Ok(Json.toJson(domain))
     }
   }
 
-//  def findById(id: Int): Future[Option[Tables.AliasRow]] = {
-//    val query: Query[Tables.Alias, Tables.Alias#TableElementType, Seq] = Alias.filter(_.id === id)
-//    val action = query.result.headOption
-//    db.run(action)
-//  }
+  def create = Action.async(parse.json) { implicit request =>
+    request.body.validate[DomainApi].map {
+      domainApi =>
+        domainDao.create(domainApi) map {
+          did => Ok(Json.obj("id" -> did))
+        }
+    } recoverTotal { t =>
+      Future.successful(BadRequest(Json.obj("error" -> "Wrong JSON format")))
+    }
+  }
 }

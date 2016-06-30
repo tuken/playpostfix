@@ -6,25 +6,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Edit Domain</h4>
+                    <h4 class="modal-title" id="myModalLabel">ドメイン編集</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="domain">ドメイン</label>
+                        <label for="domain">ドメイン名</label>
                         <input type="text" class="form-control" ng-model="selectedDomain.domain" id="domain" value="{{selectedDomain.domain}}" required>
                     </div>
                     <div class="form-group">
                         <label for="description">説明</label>
                         <input type="text" class="form-control" ng-model="selectedDomain.description" id="description" required value="{{selectedDomain.description}}">
                     </div>
-                    <div class="form-group">
-                        <label for="active">有効</label>
-                        <input type="text" class="form-control" ng-model="selectedDomain.active" value="{{selectedDomain.active}}" id="active" required>
-                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" >Cancel</button>
-                    <input type="submit" ng-disabled="editDomainForm.$invalid" class="btn btn-warning" value="Save" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal" >キャンセル</button>
+                    <input type="submit" ng-disabled="editDomainForm.$invalid" class="btn btn-warning" value="作成" />
                 </div>
             </div>
         </div>

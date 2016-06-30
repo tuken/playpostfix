@@ -43,4 +43,9 @@ class DomainDao @Inject()(protected val dbConfigProvider: DatabaseConfigProvider
 //
 //    }
   }
+
+  def create(dmn: DomainApi) (implicit ec: ExecutionContext): Future[Int] = {
+    val domainRow = DomainRow(id = 0, domain = dmn.domain, description = dmn.description, active = dmn.active)
+    db.run((Domain returning Domain.map(_.id)) += domainRow)
+  }
 }
