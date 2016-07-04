@@ -3,9 +3,14 @@ package controllers
 import javax.inject.Inject
 
 import play.api.libs.json.Json
+import play.api.libs.json.Json._
+import play.api.libs.json.JsValue
 import play.api.mvc._
+
 import scala.concurrent.Future
 import models._
+import play.Logger
+
 import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
@@ -24,6 +29,10 @@ class DomainController @Inject()(domainDao: DomainDao) extends Controller {
     Ok(views.html.domainindex())
   }
 
+  private def successResponse(data: JsValue, message: String) = {
+    obj("status" -> "success", "data" -> data, "msg" -> message)
+  }
+
   def getAll = Action.async { implicit request =>
     domainDao.getAll map {
       domain => Ok(Json.toJson(domain))
@@ -31,13 +40,23 @@ class DomainController @Inject()(domainDao: DomainDao) extends Controller {
   }
 
   def create = Action.async(parse.json) { implicit request =>
+    Logger.debug(request.toString())
     request.body.validate[DomainApi].map {
       domainApi =>
         domainDao.create(domainApi) map {
-          did => Ok(Json.obj("id" -> did))
+          //did => Ok(Json.obj("id" -> did))
+          did => Ok(successResponse(Json.toJson(Map("id" -> did)), "Domain has been created successfully."))
         }
     } recoverTotal { t =>
       Future.successful(BadRequest(Json.obj("error" -> "Wrong JSON format")))
+    }
+  }
+
+  def delete(id: Int) = Action.async { implicit request =>
+    Logger.debug(request.toString())
+    domainDao.delete(id) map {
+      //numDeleted => Ok(Json.obj("count" -> numDeleted))
+      numDeleted => Ok(successResponse(Json.toJson(Map("count" -> numDeleted)), "Domain has been deleted successfully."))
     }
   }
 }

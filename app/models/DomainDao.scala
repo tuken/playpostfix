@@ -48,4 +48,8 @@ class DomainDao @Inject()(protected val dbConfigProvider: DatabaseConfigProvider
     val domainRow = DomainRow(id = 0, domain = dmn.domain, description = dmn.description, active = dmn.active)
     db.run((Domain returning Domain.map(_.id)) += domainRow)
   }
+
+  def delete(id: Int) (implicit ec: ExecutionContext): Future[Int] = {
+    db.run(Domain.filter(_.id === id).delete)
+  }
 }

@@ -30,11 +30,10 @@ app.controller('domainCtrl', function($scope, $http, $timeout) {
      });
  };
 
- $scope.removeDomain = function(domainId){
+ $scope.removeDomain = function(domainId) {
      $http({
-         method: 'GET',
-         url: '/domain/delete',
-         params: {domainId: domainId}
+         method: 'DELETE',
+         url: '/domain/' + domainId
      }).success(function(data, status) {
          if (data.status == "success") {
              var newDomainList=[];
@@ -50,19 +49,21 @@ app.controller('domainCtrl', function($scope, $http, $timeout) {
  }
 
  $scope.addDomain = function() {
+     $scope.newDomain.id = 0;
+     $scope.newDomain.active = true;
      $http({
-         method: 'POST',
-         url: '/domain/create',
-         data: $scope.newDomain,  // pass in form data as Json
+        method: 'POST',
+        url: '/domain',
+        data: $scope.newDomain,  // pass in form data as Json
      }).success(function(data, status) {
-         $('.modal').modal('hide');
-         if (data.status == "success") {
-             var newId = data.data.id;
-             $scope.newDomain["id"] = newId;
-             $scope.domain.push($scope.newDomain);
-             $scope.newDomain = {};
-         }
-         showAlertMessage(data.status, data.msg);
+        $('.modal').modal('hide');
+        if (data.status == "success") {
+           var newId = data.data.id;
+           $scope.newDomain["id"] = newId;
+           $scope.domains.push($scope.newDomain);
+           $scope.newDomain = {};
+        }
+        showAlertMessage(data.status, data.msg);
      });
  }
 

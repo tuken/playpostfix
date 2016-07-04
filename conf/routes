@@ -8,9 +8,10 @@ GET     /                           controllers.DomainController.index
 #GET     /                           controllers.HomeController.findById(id: Int)
 GET     /alias/list                           controllers.AliasController.getAll
 GET     /domain/list                          controllers.DomainController.getAll
-GET     /domain/create                          controllers.DomainController.create
+POST     /domain                          controllers.DomainController.create
 #GET     /domain/update                          controllers.DomainController.update
-#GET     /domain/delete                          controllers.DomainController.delete
+#DELETE   /domain/{<[0-9]+>id}                          controllers.DomainController.delete(id: Int)
+DELETE   /domain/:id                          controllers.DomainController.delete(id: Int)
 GET     /codegen                    controllers.CodeGenController.index
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
