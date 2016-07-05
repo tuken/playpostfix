@@ -33,8 +33,14 @@ class DomainController @Inject()(domainDao: DomainDao) extends Controller {
     obj("status" -> "success", "data" -> data, "msg" -> message)
   }
 
-  def getAll = Action.async { implicit request =>
-    domainDao.getAll map { domain =>
+  def list = Action.async { implicit request =>
+    domainDao.findAll map { domain =>
+      Ok(Json.toJson(domain))
+    }
+  }
+
+  def get(id: Int) = Action.async { implicit request =>
+    domainDao.findById(id) map { domain =>
       Ok(Json.toJson(domain))
     }
   }

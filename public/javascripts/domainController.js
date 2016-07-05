@@ -5,7 +5,7 @@ app.controller('domainCtrl', function($scope, $http, $timeout) {
  function getAllDomain() {
      $http({
          method: 'GET',
-         url: '/domain/list'
+         url: '/domain'
      }).success(function(data, status) {
          if (status == 200) {
              $scope.domains = data;

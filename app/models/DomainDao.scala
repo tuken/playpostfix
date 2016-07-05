@@ -15,7 +15,7 @@ class DomainDao @Inject()(protected val dbConfigProvider: DatabaseConfigProvider
   val profile = driver
   import driver.api._
 
-  def getAll(implicit ec: ExecutionContext): Future[List[DomainApi]] = {
+  def findAll(implicit ec: ExecutionContext): Future[List[DomainApi]] = {
     val query = Domain
     val action = query.result
     val futureDomains = db.run(action)
@@ -51,6 +51,7 @@ class DomainDao @Inject()(protected val dbConfigProvider: DatabaseConfigProvider
       }
     }
   }
+
   def create(dmn: DomainApi) (implicit ec: ExecutionContext): Future[Int] = {
     val domainRow = DomainRow(id = 0, domain = dmn.domain, description = dmn.description, active = dmn.active)
     db.run((Domain returning Domain.map(_.id)) += domainRow)

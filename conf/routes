@@ -7,10 +7,11 @@
 GET     /                           controllers.DomainController.index
 #GET     /                           controllers.HomeController.findById(id: Int)
 GET     /alias/list                           controllers.AliasController.getAll
-GET     /domain/list                          controllers.DomainController.getAll
-POST     /domain                          controllers.DomainController.create
-PATCH    /domain/$id<[0-9]+>                          controllers.DomainController.update(id: Int)
-DELETE   /domain/$id<[0-9]+>                          controllers.DomainController.delete(id: Int)
+GET     /domain                     controllers.DomainController.list
+GET     /domain/$id<[0-9]+>         controllers.DomainController.get(id: Int)
+POST    /domain                     controllers.DomainController.create
+PATCH   /domain/$id<[0-9]+>         controllers.DomainController.update(id: Int)
+DELETE  /domain/$id<[0-9]+>         controllers.DomainController.delete(id: Int)
 GET     /codegen                    controllers.CodeGenController.index
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
