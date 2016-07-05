@@ -44,6 +44,13 @@ class DomainDao @Inject()(protected val dbConfigProvider: DatabaseConfigProvider
 //    }
   }
 
+  def findById(id: Int) (implicit ec: ExecutionContext): Future[Option[DomainApi]] = {
+    db.run(Domain.filter(_.id === id).result).map(_.headOption).map {
+      _.map { d =>
+        DomainApi(id = d.id, domain = d.domain, description = d.description, active = d.active)
+      }
+    }
+  }
   def create(dmn: DomainApi) (implicit ec: ExecutionContext): Future[Int] = {
     val domainRow = DomainRow(id = 0, domain = dmn.domain, description = dmn.description, active = dmn.active)
     db.run((Domain returning Domain.map(_.id)) += domainRow)
@@ -51,5 +58,15 @@ class DomainDao @Inject()(protected val dbConfigProvider: DatabaseConfigProvider
 
   def delete(id: Int) (implicit ec: ExecutionContext): Future[Int] = {
     db.run(Domain.filter(_.id === id).delete)
+  }
+
+  def update(id: Int, domain: DomainApi) (implicit ec: ExecutionContext): Future[Int] = {
+    findById(id) flatMap {
+      case None => Future.successful(0)
+      case Some(oldDomain) => {
+        val updateQuery = Domain.filter(_.id === id).map(d => (d.domain, d.description, d.active)).update(domain.domain, domain.description, domain.active)
+        db.run(updateQuery)
+      }
+    }
   }
 }

@@ -34,18 +34,17 @@ class DomainController @Inject()(domainDao: DomainDao) extends Controller {
   }
 
   def getAll = Action.async { implicit request =>
-    domainDao.getAll map {
-      domain => Ok(Json.toJson(domain))
+    domainDao.getAll map { domain =>
+      Ok(Json.toJson(domain))
     }
   }
 
   def create = Action.async(parse.json) { implicit request =>
     Logger.debug(request.toString())
-    request.body.validate[DomainApi].map {
-      domainApi =>
-        domainDao.create(domainApi) map {
-          //did => Ok(Json.obj("id" -> did))
-          did => Ok(successResponse(Json.toJson(Map("id" -> did)), "Domain has been created successfully."))
+    request.body.validate[DomainApi].map { domainApi =>
+        domainDao.create(domainApi) map { did =>
+          //Ok(Json.obj("id" -> did))
+          Ok(successResponse(Json.toJson(Map("id" -> did)), "Domain has been created successfully."))
         }
     } recoverTotal { t =>
       Future.successful(BadRequest(Json.obj("error" -> "Wrong JSON format")))
@@ -54,9 +53,19 @@ class DomainController @Inject()(domainDao: DomainDao) extends Controller {
 
   def delete(id: Int) = Action.async { implicit request =>
     Logger.debug(request.toString())
-    domainDao.delete(id) map {
-      //numDeleted => Ok(Json.obj("count" -> numDeleted))
-      numDeleted => Ok(successResponse(Json.toJson(Map("count" -> numDeleted)), "Domain has been deleted successfully."))
+    domainDao.delete(id) map { numDeleted =>
+      //Ok(Json.obj("count" -> numDeleted))
+      Ok(successResponse(Json.toJson(Map("count" -> numDeleted)), "Domain has been deleted successfully."))
+    }
+  }
+
+  def update(id: Int) = Action.async(parse.json) { implicit request =>
+    request.body.validate[DomainApi].map { domainApi =>
+      domainDao.update(id, domainApi) map { numUpdated =>
+        Ok(successResponse(Json.toJson(Map("count" -> numUpdated)), "Domain has been updated successfully."))
+      }
+    } recoverTotal { t =>
+      Future.successful(BadRequest(Json.obj("error" -> "Wring JSON Format")))
     }
   }
 }

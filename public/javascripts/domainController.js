@@ -20,8 +20,8 @@ app.controller('domainCtrl', function($scope, $http, $timeout) {
 
  $scope.updateDomain = function() {
      $http({
-         method: 'POST',
-         url: '/domain/update',
+         method: 'PATCH',
+         url: '/domain/' + $scope.selectedDomain.id,
          data: $scope.selectedDomain,  // pass in form data as Json
      }).success(function(data, status) {
          $('.modal').modal('hide');
