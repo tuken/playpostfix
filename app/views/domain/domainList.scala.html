@@ -2,7 +2,7 @@
     <thead>
     <th>ドメイン名</th>
     <th>説明</th>
-    <th>有効</th>
+    <th></th>
     <th></th>
     <th></th>
     </thead>
@@ -11,7 +11,7 @@
         <td>{{domain.domain}}</td>
         <td>{{domain.description}}</td>
         <td>
-            <input type="checkbox" ng-model="domain.active" />
+            <input type="checkbox" ng-model="domain.active" ng-change="activeDomain(domain)" />
         </td>
         <td>
             <i title="Edit" style="color: #128d36;" data-toggle="modal" data-target="#editDomainModal" class="glyphicon glyphicon-edit cursorPointer" ng-click="editDomain(domain)">
@@ -24,4 +24,4 @@
     </tr>
     </tbody>
 </table>
-<p style="color: rgb(110, 114, 114)">Showing <strong style="color: rgb(42, 41, 41);">{{ (domains | filter:searchDomain).length }}</strong> of <strong style="color: rgb(16, 106, 135);">{{domains.length}}</strong> entries</p>
+<!--<p style="color: rgb(110, 114, 114)">Showing <strong style="color: rgb(42, 41, 41);">{{ (domains | filter:searchDomain).length }}</strong> of <strong style="color: rgb(16, 106, 135);">{{domains.length}}</strong> entries</p>-->

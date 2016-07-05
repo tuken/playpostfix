@@ -2,6 +2,7 @@ var app = angular.module('myApp', []);
 app.controller('domainCtrl', function($scope, $http, $timeout) {
  $scope.domains = [];
  $scope.newDomain = {};
+
  function getAllDomain() {
      $http({
          method: 'GET',
@@ -17,6 +18,16 @@ app.controller('domainCtrl', function($scope, $http, $timeout) {
  $scope.editDomain = function(domain) {
      $scope.selectedDomain = angular.copy(domain);
  };
+
+ $scope.activeDomain = function(domain) {
+     $http({
+         method: 'PATCH',
+         url: '/domain/' + domain.id,
+         data: domain,
+     }).success(function(data, status) {
+         showAlertMessage(data.status, data.msg);
+     })
+ }
 
  $scope.updateDomain = function() {
      $http({
