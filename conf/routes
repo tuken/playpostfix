@@ -11,7 +11,7 @@ GET     /domain/list                          controllers.DomainController.getAl
 POST     /domain                          controllers.DomainController.create
 #GET     /domain/update                          controllers.DomainController.update
 #DELETE   /domain/{<[0-9]+>id}                          controllers.DomainController.delete(id: Int)
-DELETE   /domain/:id                          controllers.DomainController.delete(id: Int)
+DELETE   /domain/$id<[0-9]+>                          controllers.DomainController.delete(id: Int)
 GET     /codegen                    controllers.CodeGenController.index
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
