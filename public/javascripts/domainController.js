@@ -19,6 +19,10 @@ app.controller('domainCtrl', function($scope, $http, $timeout) {
      $scope.selectedDomain = angular.copy(domain);
  };
 
+ $scope.detailDomain = function() {
+     alert('aaa');
+ }
+
  $scope.activeDomain = function(domain) {
      $http({
          method: 'PATCH',
