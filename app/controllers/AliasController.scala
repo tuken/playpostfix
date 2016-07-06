@@ -30,7 +30,7 @@ class AliasController @Inject()(aliasDao: AliasDao) extends Controller {
 //    println(Alias.filter(_.id === 1).run)
 //  }
 
-  def getAll() = Action.async { implicit request =>
+  def list() = Action.async { implicit request =>
     aliasDao.getAll map {
       alias => Ok(Json.toJson(alias))
     }

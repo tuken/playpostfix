@@ -4,9 +4,10 @@
 
 # An example controller showing a sample home page
 #GET     /                           controllers.HomeController.index
-GET     /                           controllers.DomainController.index
 #GET     /                           controllers.HomeController.findById(id: Int)
-GET     /alias/list                           controllers.AliasController.getAll
+GET     /                           controllers.DomainController.index
+GET     /alias                      controllers.AliasController.index
+GET     /aliases                    controllers.AliasController.list
 GET     /domain                     controllers.DomainController.list
 GET     /domain/$id<[0-9]+>         controllers.DomainController.get(id: Int)
 POST    /domain                     controllers.DomainController.create

@@ -1,5 +1,5 @@
 var app = angular.module('myApp', []);
-app.controller('domainCtrl', function($scope, $http, $timeout) {
+app.controller('domainCtrl', function($scope, $http, $timeout, $location) {
  $scope.domains = [];
  $scope.newDomain = {};
 
@@ -19,7 +19,15 @@ app.controller('domainCtrl', function($scope, $http, $timeout) {
      $scope.selectedDomain = angular.copy(domain);
  };
 
- $scope.detailDomain = function() {
+// $scope.detailDomain = function() {
+//     alert('aaa');
+// }
+
+ $scope.gotoAliases = function() {
+     $location.path('/alias');
+ }
+
+ $scope.gotoMailboxes = function() {
      alert('aaa');
  }
 
