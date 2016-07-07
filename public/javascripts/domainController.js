@@ -25,6 +25,7 @@ app.controller('domainCtrl', function($scope, $http, $timeout, $location) {
 
  $scope.gotoAliases = function() {
      $location.path('/alias');
+     $scope.$apply();
  }
 
  $scope.gotoMailboxes = function() {
