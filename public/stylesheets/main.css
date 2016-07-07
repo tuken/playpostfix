@@ -43,3 +43,8 @@ header {
        vertical-align: middle;
        box-shadow: 4px 4px 4px #B3AFAF;
 }
+
+.myGrid {
+    width: 500px;
+    height: 250px;
+}

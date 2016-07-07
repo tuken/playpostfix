@@ -8,6 +8,7 @@
 GET     /                           controllers.DomainController.index
 GET     /alias                      controllers.AliasController.index
 GET     /aliases                    controllers.AliasController.list
+GET     /grid                       controllers.DomainController.grid
 GET     /domain                     controllers.DomainController.list
 GET     /domain/$id<[0-9]+>         controllers.DomainController.get(id: Int)
 POST    /domain                     controllers.DomainController.create

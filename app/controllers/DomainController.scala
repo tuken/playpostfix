@@ -29,6 +29,10 @@ class DomainController @Inject()(domainDao: DomainDao) extends Controller {
     Ok(views.html.domainindex())
   }
 
+  def grid = Action {
+    Ok(views.html.gridindex())
+  }
+
   private def successResponse(data: JsValue, message: String) = {
     obj("status" -> "success", "data" -> data, "msg" -> message)
   }
